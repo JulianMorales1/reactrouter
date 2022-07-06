@@ -14,11 +14,13 @@ function App() {
       <header className="App-header">
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/submit-blog" element={<SubmitBlog />}></Route>
           <Route path="/blogs"  element={<Blogs />}>
-            <Route index element={<AllBlogs />}></Route>
+          <Route path="/blogs/submit-blog" element={<SubmitBlog />}>
+          </Route>
+            <Route index element={<AllBlogs />}>
+            </Route>
             <Route path="/blogs/all" element ={<AllBlogs />}>
-             </Route>
+            </Route>
           <Route path="single-blog/:blogId" element={<BlogPost/>}/>
           </Route>
         </Routes>

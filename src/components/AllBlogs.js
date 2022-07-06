@@ -22,20 +22,22 @@ const AllBlogs = ()=>{
 
             let filtered = allBlogs;
             
-
+                
 
                 let sortOrder = searchParams.get('sortOrder');
                 let sortField = searchParams.get('sortField');
-                let limit = searchParams.get('limit');
-                let page = searchParams.get('page');
-                if((!sortOrder) && (!sortField)){
+                let limit = Number(searchParams.get('limit'));
+                let page = Number(searchParams.get('page'));
+
+              
+
+                if((!sortOrder) && (!sortField) && (!limit) && (!page)){
                     
-                   // alert('no search')
+                  console.log("no search")
 
                 }else{
-                    filtered= data.blogPosts.sort(function (a, b) {
+                    filtered = data.blogPosts.sort(function (a, b) {
                         var dateA = new Date(a.createdAt), dateB = new Date(b.createdAt)
-                        console.log(dateA)
                         return dateA - dateB
                         
                     });
@@ -43,21 +45,11 @@ const AllBlogs = ()=>{
                     if(!limit && !page){
                         
                     }else{
+                       
+                        filtered = filtered.slice(page * limit, (page * limit) + limit);
 
-
-                        /*
-                        limit=2 page=1 ==> filted[0,1]
-                        limit=2 page =2 ==. filtered[2,3]
-                        limit=2 page=3 ==> filtered[4,5]
-
-                            page=4 =>filted[6,7]
-
-
-
-
-                        */
                     }
-           
+                    
                 }
 
     return(
